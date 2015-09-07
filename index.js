@@ -8,13 +8,11 @@ module.exports = function(prompts, callback) {
   var props = {};
 
   prompts.forEach(function(prompt) {
-    this.option(prompt.name);
-    var option = this.options[prompt.name];
-
-    if (option !== undefined) {
-      // Options supplied, add to props
-      props[prompt.name] = option;
-    } else {
+    if(prompt.name in this.options){
+        // Options supplied, add to props
+        props[prompt.name] = this.options[prompt.name];
+    }
+    else{
       // No option supplied, user will be prompted
       filteredPrompts.push(prompt);
     }
